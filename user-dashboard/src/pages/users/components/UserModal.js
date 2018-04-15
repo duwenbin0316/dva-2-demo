@@ -52,7 +52,7 @@ class UserModal extends Component {
                     visible={this.state.visible}
                     onOk={this.okHandler}
                     onCancel={this.hideModelHandler}>
-                    <Form horizontal onSubmit={this.okHandler}>
+                    <Form onSubmit={this.okHandler}>
                         <FormItem {...formItemLayout} label="Name">
                             {getFieldDecorator('name', {initialValue: name})(<Input/>)
                             }

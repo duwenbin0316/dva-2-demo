@@ -4,6 +4,7 @@ import { routerRedux } from 'dva/router';
 import styles from './Users.css';
 import { PAGE_SIZE } from '../constants';
 import UserModal from './UserModal';
+const Mock = require('mockjs')
 
 function Users({ dispatch, list: dataSource, loading, total, page: current }) {
   function deleteHandler(id) {
@@ -32,6 +33,18 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       type: 'users/create',
       payload: values,
     });
+  }
+
+  function mockData() {
+    var data = Mock.mock({
+        // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+        'list|1-10': [{
+            // 属性 id 是一个自增数，起始值为 1，每次增 1
+            'id|+1': 1
+        }]
+    })
+    // 输出结果
+    console.log(JSON.stringify(data, null, 4))
   }
 
   const columns = [
@@ -72,6 +85,7 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       <UserModal record={{}} onOk={createHandler.bind(this)}>
         <Button className={ styles.create }>Create User</Button>
       </UserModal>
+      <Button className={ styles.create } onClick={ mockData }>Mock Data</Button>
       <div>
         <Table
           columns={columns}
