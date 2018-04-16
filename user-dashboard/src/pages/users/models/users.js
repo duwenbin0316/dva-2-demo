@@ -1,4 +1,5 @@
 import * as usersService from '../services/users';
+import { success } from "../components/Users";
 
 export default {
   namespace: 'users',
@@ -36,6 +37,7 @@ export default {
     },
     *create({ payload: values }, { call, put, select }) {
       yield call(usersService.create,  values);
+      yield call(success);
       const page = yield select(state => state.users.page);
       yield put({ type: 'fetch', payload: { page } });
     }

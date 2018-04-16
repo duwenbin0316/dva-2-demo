@@ -1,5 +1,5 @@
 import { connect } from 'dva';
-import { Table, Pagination, Popconfirm, Button } from 'antd';
+import { Table, Pagination, Popconfirm, Button, message } from 'antd';
 import { routerRedux } from 'dva/router';
 import styles from './Users.css';
 import { PAGE_SIZE } from '../constants';
@@ -40,12 +40,14 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
         // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
         'list|1-10': [{
             // 属性 id 是一个自增数，起始值为 1，每次增 1
-            'id|+1': 1
+            'id|+1': 1,
+            'name': '@first @last'
         }]
     })
     // 输出结果
     console.log(JSON.stringify(data, null, 4))
   }
+  
 
   const columns = [
     {
@@ -117,3 +119,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Users);
+
+export const success = () => {
+  message.success('This is a message of success');
+}
